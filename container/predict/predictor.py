@@ -81,8 +81,12 @@ def transformation():
         print("reading input file...")
         img_binary = flask.request.data
         img = Image.open(io.BytesIO(img_binary)).convert("RGB")
-        print(img.size)
-        # img_invert = ImageOps.invert(img)
+        img_invert = ImageOps.invert(img)
+
+        # 画像からバイナリに変換
+        with io.BytesIO() as output:
+            img_invert.save(output, format="JPEG")
+            img_invert_binary = output.getvalue()
 
         # img_invert.save(os.path.join(output_path, "output.jpg"), format="jpeg")
 
@@ -97,7 +101,7 @@ def transformation():
     # result = open(os.path.join(output_path, "predicted.txt"))
 
     # response = flask.make_response(img_binary)
-    response = flask.make_response(img_binary)
+    response = flask.make_response(img_invert_binary)
     response.headers.set("Content-Type", "image/jpeg")
 
     print("Inverted!!!!!")
