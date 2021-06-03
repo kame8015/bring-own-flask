@@ -11,7 +11,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
 
-RUN pip --no-cache-dir install flask gunicorn Pillow
+RUN pip --no-cache-dir install flask gunicorn Pillow boto3
 
 ENV PYTHONUNBUFFERED=TRUE
 ENV PYTHONDONTWRITEBYTECODE=TRUE
