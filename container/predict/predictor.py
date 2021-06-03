@@ -4,8 +4,13 @@ from PIL import Image, ImageOps
 import io
 import flask
 
+# import boto3
+
 # The flask app for serving predictions
 app = flask.Flask(__name__)
+
+# s3 = boto3.resource("s3")
+# bucket = s3.Bucket("kame-sagemaker-test")
 
 prefix = "/opt/ml/"
 model_path = os.path.join(prefix, "model")
