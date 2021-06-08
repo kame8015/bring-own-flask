@@ -3,8 +3,8 @@ import os
 from PIL import Image, ImageOps
 import io
 import flask
-
-# import boto3
+import boto3
+import time
 
 # The flask app for serving predictions
 app = flask.Flask(__name__)
@@ -18,6 +18,15 @@ model_path = os.path.join(prefix, "model")
 UPLOAD_FOLDER = "./uploads"
 ALLOWED_EXTENTIONS = set(["jpg", "jpeg"])
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+
+class S3Resource:
+    def __init__(self):
+        s3 = boto3.resource("s3")
+        self.bucket = s3.Bucket("kame-sagemaker-test")
+
+    def put(self, file_name, data):
+        self.bucket.put_object(Key=file_name, Body=data)
 
 
 class ScoringService(object):
@@ -62,6 +71,11 @@ def transformation():
         with io.BytesIO() as output:
             img_invert.save(output, format="JPEG")
             img_invert_binary = output.getvalue()
+
+    # boto3 を使って S3 バケットにプッシュ
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    S3Resource().put(f"output/{timestamp}.jpg", img_invert_binary)
+    print(f"Put {timestamp} to 'kame-sagemaker-test/output'")
 
     response = flask.make_response(img_invert_binary)
     response.headers.set("Content-Type", "image/jpeg")

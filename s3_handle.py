@@ -14,6 +14,6 @@ if __name__ == "__main__":
     # bucket_obj = S3Handler().bucket
 
     data = open("./container/test_dir/predict/images/cat.jpg", "rb")
-    S3Handler().put("cat.jpg", data)
+    S3Handler().put("input/cat.jpg", data)
 
     print("Put Succeeded!")
