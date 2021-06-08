@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: sbs ECR Repository
+
+Resources:
+  ECRRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: flask_test
+      Tags:
+        - Key: Owner
+          Value: ojt
