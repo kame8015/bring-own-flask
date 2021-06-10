@@ -20,7 +20,7 @@ Parameters:
   ModelPath:
     Description: Model Input Bucket Path
     Type: String
-  ECRImageArn:
+  ECRImageUrl:
     Description: ECR Image ARN
     Type: String
 
@@ -29,10 +29,10 @@ Resources:
     Type: AWS::SageMaker::Model
     Properties:
       ModelName: !Ref ModelName
-      ExecutionRoleArn: !Sub arn:aws:iam::${AWS::AccountId}:role/${Service}/${Service}-${AccountType}-role-PowerUser
+      ExecutionRoleArn: !Sub arn:aws:iam::${AWS::AccountId}:role/${Service}/${Service}-${AccountType}-role-DeployService
       PrimaryContainer:
         ModelDataUrl: !Ref ModelPath
-        Image: !Ref ECRImageArn
+        Image: !Ref ECRImageUri
       Tags:
         - Key: Owner
           Value: !Ref Service
