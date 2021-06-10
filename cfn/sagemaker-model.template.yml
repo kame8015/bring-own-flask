@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: SageMaker Model template
+
+Parameters:
+  Service:
+    Description: service name
+    Type: String
+    Default: sbs
+    AllowedValues:
+      - sbs
+  AccountType:
+    Description: Account Type
+    Type: String
+    Default: dva
+    AllowedValues:
+      - dva
+  ModelName:
+    Description: Model Name
+    Type: String
+  ModelPath:
+    Description: Model Input Bucket Path
+    Type: String
+  ECRImageArn:
+    Description: ECR Image ARN
+    Type: String
+
+Resources:
+  SageMakerModel:
+    Type: AWS::SageMaker::Model
+    Properties:
+      ModelName: ${ModelName}
+      ExecutionRoleArn: !Sub arn:aws:iam::${AccountId}:role/${Service}/${Service}-${AccountType}-role-PowerUser
+      PrimaryContainer:
+        ModelDataUrl: ${ModelPath}
+        Image: ${ECRImageArn}
+      Tags:
+        - Key: Owner
+          Value: ${Service}
