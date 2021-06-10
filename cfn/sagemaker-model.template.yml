@@ -20,7 +20,7 @@ Parameters:
   ModelPath:
     Description: Model Input Bucket Path
     Type: String
-  ECRImageUrl:
+  ECRImageUri:
     Description: ECR Image ARN
     Type: String
 
