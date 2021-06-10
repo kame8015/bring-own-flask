@@ -28,11 +28,11 @@ Resources:
   SageMakerModel:
     Type: AWS::SageMaker::Model
     Properties:
-      ModelName: !Ref ${ModelName}
+      ModelName: !Ref ModelName
       ExecutionRoleArn: !Sub arn:aws:iam::${AWS::AccountId}:role/${Service}/${Service}-${AccountType}-role-PowerUser
       PrimaryContainer:
-        ModelDataUrl: !Ref ${ModelPath}
-        Image: !Ref ${ECRImageArn}
+        ModelDataUrl: !Ref ModelPath
+        Image: !Ref ECRImageArn
       Tags:
         - Key: Owner
-          Value: !Ref ${Service}
+          Value: !Ref Service
