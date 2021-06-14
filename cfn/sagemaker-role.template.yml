@@ -19,7 +19,7 @@ Mappings:
       "Abbreviation": ew1
     eu-central-1:
       "Abbreviation": ec1
-    us-west:2:
+    us-west-2:
       "Abbreviation": uw2
     us-east-1:
       "Abbreviation": ue1
@@ -39,7 +39,7 @@ Resources:
       RoleName: !Sub
         - ${ServiceId}-${RegionShort}-sagemaker-role
         - RegionShort:
-            !FindInMap: [RegionMap, !Ref AWS::Region, "Abbreviation"]
+            !FindInMap [RegionMap, !Ref AWS::Region, "Abbreviation"]
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
           
