@@ -29,7 +29,7 @@ Resources:
     Type: AWS::SageMaker::Model
     Properties:
       ModelName: !Ref ModelName
-      ExecutionRoleArn: !Sub arn:aws:iam::${AWS::AccountId}:role/${Service}/${Service}-${AccountType}-role-SageMaker
+      ExecutionRoleArn: !Sub arn:aws:iam::${AWS::AccountId}:role/${Service}/${Service}-${AccountType}-role-PowerUser
       PrimaryContainer:
         ModelDataUrl: !Ref ModelPath
         Image: !Ref ECRImageUri
