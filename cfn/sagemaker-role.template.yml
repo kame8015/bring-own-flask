@@ -29,7 +29,7 @@ Resources:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
-        Statememt:
+        Statement:
           - Effect: Allow
             Action:
               - sts:AssumeRole
