@@ -45,7 +45,7 @@ Resources:
     Properties:
       ModelName: !Ref ModelName
       ExecutionRoleArn: !Sub
-        - arn:aws:iam::${AWS::AccountId}:role/${Service}/${Service}-${RegionShort}-sagemaker-role
+        - arn:aws:iam::${AWS::AccountId}:role/${Service}-${RegionShort}-sagemaker-role
         - RegionShort:
             !FindInMap [RegionMap, !Ref AWS::Region, "Abbreviation"]
       PrimaryContainer:
