@@ -21,23 +21,8 @@ Parameters:
     Description: Model Input Bucket Path
     Type: String
   ECRImageUri:
-    Description: ECR Image ARN
+    Description: ECR Image Uri
     Type: String
-
-Mappings:
-    RegionMap:
-      ap-northeast-1:
-        "Abbreviation": an1
-      ap-southeast-2:
-        "Abbreviation": as2
-      eu-west-1:
-        "Abbreviation": ew1
-      eu-central-1:
-        "Abbreviation": ec1
-      us-west-2:
-        "Abbreviation": uw2
-      us-east-1:
-        "Abbreviation": ue1
 
 Resources:
   SageMakerModel:
@@ -45,9 +30,7 @@ Resources:
     Properties:
       ModelName: !Ref ModelName
       ExecutionRoleArn: !Sub
-        - arn:aws:iam::${AWS::AccountId}:role/${Service}-${RegionShort}-sagemaker-role
-        - RegionShort:
-            !FindInMap [RegionMap, !Ref AWS::Region, "Abbreviation"]
+        - arn:aws:iam::${AWS::AccountId}:role/${Service}/${Service}-${AccountType}-role-SageMaker
       PrimaryContainer:
         ModelDataUrl: !Ref ModelPath
         Image: !Ref ECRImageUri
