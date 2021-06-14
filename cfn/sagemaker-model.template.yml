@@ -47,7 +47,7 @@ Resources:
       ExecutionRoleArn: !Sub
         - arn:aws:iam::${AWS::AccountId}:role/${Service}/${Service}-${RegionShort}-sagemaker-role
         - RegionShort:
-            !FindInMap [RegionShort, !Ref AWS::Region, "Abbreviation"]
+            !FindInMap [RegionMap, !Ref AWS::Region, "Abbreviation"]
       PrimaryContainer:
         ModelDataUrl: !Ref ModelPath
         Image: !Ref ECRImageUri
