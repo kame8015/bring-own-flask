@@ -61,16 +61,18 @@ def ping():
 @app.route("/invocations", methods=["POST"])
 def transformation():
     # データの取り出し
-    if flask.request.content_type == "application/x-image":
-        print("reading input file...")
-        img_binary = flask.request.data
-        img = Image.open(io.BytesIO(img_binary)).convert("RGB")
-        img_invert = ImageOps.invert(img)
+    # if flask.request.content_type == "application/x-image":
+    print(flask.request.content_type)
 
-        # 画像からバイナリに変換
-        with io.BytesIO() as output:
-            img_invert.save(output, format="JPEG")
-            img_invert_binary = output.getvalue()
+    print("reading input file...")
+    img_binary = flask.request.data
+    img = Image.open(io.BytesIO(img_binary)).convert("RGB")
+    img_invert = ImageOps.invert(img)
+
+    # 画像からバイナリに変換
+    with io.BytesIO() as output:
+        img_invert.save(output, format="JPEG")
+        img_invert_binary = output.getvalue()
 
     # boto3 を使って S3 バケットにプッシュ
     # timestamp = time.strftime("%Y%m%d-%H%M%S")
